@@ -1,0 +1,19 @@
+{
+    "name": "userfrosting/sprinkle-demo",
+    "type": "sprinkle",
+    "description": "Demo module for UserFrosting 4.",
+    "homepage": "https://demo.userfrosting.com",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name": "Alexander Weissman",
+            "homepage": "https://alexanderweissman.com"
+        }
+    ],
+    "version": "4.0.0",
+    "autoload": {
+        "psr-4": {
+            "UserFrosting\\Sprinkle\\Demo\\": "src/"
+        }
+    }
+}
