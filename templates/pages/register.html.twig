@@ -5,6 +5,10 @@
 
 {% block page_description %}{{translate('PAGE.LOGIN.DESCRIPTION', {'site_name': site.title })}}{% endblock %}
 
+{% block stylesheets_page %}
+    {{ assets.css('css/pages/register') | raw }}
+{% endblock %}
+
 {% block body_attributes %}
     class="hold-transition login-page"
 {% endblock %}

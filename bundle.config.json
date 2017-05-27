@@ -1,0 +1,16 @@
+{
+    "bundle": {
+        "css/pages/register": {
+            "styles": [
+                "local/pages/css/register.css"
+            ],
+            "options": {
+                "result": {
+                    "type": {
+                        "styles": "plain"
+                    }
+                }
+            }
+        }
+    }
+}
