@@ -1,6 +1,6 @@
 /**
  * Page-specific CSS file.  Should generally be included as a separate asset bundle in your page template.
- * example: {{ assets.css('js/pages/sign-in-or-register') | raw }}
+ * example: {{ assets.css('css/pages/sign-in-or-register') | raw }}
  *
  * Target page: account/register
  */

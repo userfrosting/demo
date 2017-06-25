@@ -1,9 +1,9 @@
 <?php
-namespace UserFrosting\Sprinkle\Demo\Model;
+namespace UserFrosting\Sprinkle\Demo\Database\Models;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
-use UserFrosting\Sprinkle\Account\Model\User;
-use UserFrosting\Sprinkle\Demo\Model\Member;
+use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\Demo\Database\Models\Member;
 
 trait LinkMember
 {
@@ -61,7 +61,7 @@ class DemoUser extends User
         if (in_array($name, [
             'member'
         ])) {
-            return isset($this->member);
+            return true;
         } else {
             return parent::__isset($name);
         }
@@ -80,7 +80,7 @@ class DemoUser extends User
      */
     public function member()
     {
-        return $this->hasOne('\UserFrosting\Sprinkle\Demo\Model\Member', 'user_id');
+        return $this->hasOne('\UserFrosting\Sprinkle\Demo\Database\Models\Member', 'user_id');
     }
 
     /**

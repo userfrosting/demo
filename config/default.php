@@ -10,6 +10,9 @@
                 'name'  => 'UserFrosting'
             ]
         ],
+        'session' => [
+            'name'          => 'uf-demo'
+        ],
         'site' => [
             'title'     =>      'UserFrosting Demo',
             'analytics' => [

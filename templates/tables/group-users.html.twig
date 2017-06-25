@@ -5,17 +5,17 @@
  # to render the table cells with the data from the AJAX request.
 #}
 
-{% extends "components/tables/table-paginated.html.twig" %}
+{% extends "tables/table-paginated.html.twig" %}
 
 {% block table %}
-    <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="[[0, 0]]">
+    <table id="{{table.id}}" class="tablesorter table table-bordered table-hover table-striped" data-sortlist="{{table.sortlist}}">
         <thead>
             <tr>
-                <th class="sorter-metatext" data-column-name="name" data-column-template="#user-table-column-info">{{translate('USER')}} <i class="fa fa-sort"></i></th>
+                <th class="sorter-metatext" data-column-name="name" data-column-template="#user-table-column-info" data-priority="1">{{translate('USER')}} <i class="fa fa-sort"></i></th>
                 {% if 'last_activity' in table.columns %}
-                    <th class="sorter-metanum" data-column-name="last_activity" data-column-template="#user-table-column-last-activity">{{translate("ACTIVITY.LAST")}} <i class="fa fa-sort"></i></th>
+                    <th class="sorter-metanum" data-column-name="last_activity" data-column-template="#user-table-column-last-activity" data-priority="2">{{translate("ACTIVITY.LAST")}} <i class="fa fa-sort"></i></th>
                 {% endif %}
-                <th data-column-name="flag_enabled" data-column-template="#user-table-column-actions">{{translate("STATUS")}}/{{translate("ACTIONS")}} <i class="fa fa-sort"></i></th>
+                <th class="filter-select filter-metatext" data-column-name="status" data-column-template="#user-table-column-actions" data-priority="1">{{translate("STATUS")}}/{{translate("ACTIONS")}} <i class="fa fa-sort"></i></th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
     <script id="user-table-column-info" type="text/x-handlebars-template">
         <td data-text="{{row.last_name}}">
             <strong>
-                <a href="{{site.uri.public}}/admin/users/u/{{row.user_name}}">{{row.first_name}} {{row.last_name}} ({{row.user_name}})</a>
+                <a href="{{site.uri.public}}/users/u/{{row.user_name}}">{{row.first_name}} {{row.last_name}} ({{row.user_name}})</a>
             </strong>
             <div class="js-copy-container">
                 <span class="js-copy-target">{{row.email}}</span>
@@ -58,15 +58,25 @@
     </script>
 
     <script id="user-table-column-actions" type="text/x-handlebars-template">
-        <td>
+        <td
+            {{#ifx row.flag_enabled '==' 0 }}
+                data-text="disabled"
+            {{ else }}
+                {{#ifx row.flag_verified '==' 0 }}
+                    data-text="unactivated"
+                {{ else }}
+                    data-text="active"
+                {{/ifx }}
+            {{/ifx }}
+        >
             <div class="btn-group">
-                {{#ifCond row.flag_enabled 0 }}
+                {{#ifx row.flag_enabled '==' 0 }}
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         {% endverbatim %}{{translate("DISABLED")}}{% verbatim %}
                         <span class="caret"></span>
                     </button>
                 {{ else }}
-                    {{#ifCond row.flag_verified 0 }}
+                    {{#ifx row.flag_verified '==' 0 }}
                         <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                             {% endverbatim %}{{translate("UNACTIVATED")}}{% verbatim %}
                             <span class="caret"></span>
@@ -76,19 +86,24 @@
                             {% endverbatim %}{{translate("ACTIVE")}}{% verbatim %}
                             <span class="caret"></span>
                         </button>
-                    {{/ifCond }}
-                {{/ifCond }}
-                <ul class="dropdown-menu" role="menu">
-                    {{#ifCond row.flag_verified 0 }}
+                    {{/ifx }}
+                {{/ifx }}
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    {{#ifx row.flag_verified '==' 0 }}
                     <li>
                         <a href="#" data-user_name="{{row.user_name}}" class="js-user-activate">
                         <i class="fa fa-bolt"></i> {% endverbatim %}{{translate("USER.ACTIVATE")}}{% verbatim %}
                         </a>
                     </li>
-                    {{/ifCond }}
+                    {{/ifx }}
                     <li>
                         <a href="#" data-user_name="{{row.user_name}}" class="js-user-edit">
                         <i class="fa fa-edit"></i> {% endverbatim %}{{translate("USER.EDIT")}}{% verbatim %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-user_name="{{row.user_name}}" class="js-user-roles">
+                        <i class="fa fa-drivers-license"></i> {% endverbatim %}{{translate("ROLE.MANAGE")}}{% verbatim %}
                         </a>
                     </li>
                     <li>
@@ -97,7 +112,7 @@
                         </a>
                     </li>
                     <li>
-                    {{#ifCond row.flag_enabled 1 }}
+                    {{#ifx row.flag_enabled '==' 1 }}
                         <a href="#" data-user_name="{{row.user_name}}" class="js-user-disable">
                         <i class="fa fa-minus-circle"></i> {% endverbatim %}{{translate("USER.DISABLE")}}{% verbatim %}
                         </a>
@@ -105,7 +120,12 @@
                         <a href="#" data-user_name="{{row.user_name}}" class="js-user-enable">
                         <i class="fa fa-plus-circle"></i> {% endverbatim %}{{translate("USER.ENABLE")}}{% verbatim %}
                         </a>
-                    {{/ifCond }}
+                    {{/ifx }}
+                    </li>
+                    <li>
+                        <a href="#" data-user_name="{{row.user_name}}" class="js-user-delete">
+                        <i class="fa fa-trash-o"></i> {% endverbatim %}{{translate("USER.DELETE")}}{% verbatim %}
+                        </a>
                     </li>
                 </ul>
             </div>

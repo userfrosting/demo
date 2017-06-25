@@ -1,9 +1,9 @@
 <?php
-namespace UserFrosting\Sprinkle\Demo\Model;
+namespace UserFrosting\Sprinkle\Demo\Database\Models;
 
-use UserFrosting\Sprinkle\Core\Model\UFModel;
+use UserFrosting\Sprinkle\Core\Database\Models\Model;
 
-class Member extends UFModel
+class Member extends Model
 {
     public $timestamps = true;
 

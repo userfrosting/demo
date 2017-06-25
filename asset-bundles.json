@@ -2,7 +2,7 @@
     "bundle": {
         "css/pages/register": {
             "styles": [
-                "local/pages/css/register.css"
+                "userfrosting/css/pages/register.css"
             ],
             "options": {
                 "result": {

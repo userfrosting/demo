@@ -1,4 +1,4 @@
-{% extends "layouts/basic.html.twig" %}
+{% extends "pages/abstract/base.html.twig" %}
 
 {# Overrides blocks in head of base template #}
 {% block page_title %}Register for a new account{% endblock %}
@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block content %}
-{% include "components/welcome-callout.html.twig" %}
+{% include "pages/partials/welcome-callout.html.twig" %}
 <div class="login-box">
     <div class="login-logo">
         <a href="{{site.uri.public}}">{{site.title}}</a>
@@ -26,7 +26,7 @@
         <div class="form-alerts" id="alerts-page"></div>
 
         <form id="register" role="form" action="{{site.uri.public}}/account/register" method="post" class="r-form">
-            {% include "components/csrf.html.twig" %}
+            {% include "forms/csrf.html.twig" %}
             <label for="r-form-first-name">{{translate('NAME_AND_EMAIL')}}</label>
             <div class="row">
                 <div class="col-md-6">
@@ -108,7 +108,7 @@
 {% block scripts_page %}
     <!-- Include validation rules -->
     <script>
-        {% include "components/page.js.twig" %}
+        {% include "pages/partials/page.js.twig" %}
     </script>
 
     <!-- Include page-specific JS -->

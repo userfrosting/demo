@@ -3,7 +3,6 @@
  * UserFrosting (http://www.userfrosting.com)
  *
  * @link      https://github.com/userfrosting/UserFrosting
- * @copyright Copyright (c) 2013-2016 Alexander Weissman
  * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
 namespace UserFrosting\Sprinkle\Demo\ServicesProvider;
@@ -27,7 +26,7 @@ class ServicesProvider
          * Mappings added: DemoUser
          */
         $container->extend('classMapper', function ($classMapper, $c) {
-            $classMapper->setClassMapping('user', 'UserFrosting\Sprinkle\Demo\Model\DemoUser');
+            $classMapper->setClassMapping('user', 'UserFrosting\Sprinkle\Demo\Database\Models\DemoUser');
             return $classMapper;
         });
     }
