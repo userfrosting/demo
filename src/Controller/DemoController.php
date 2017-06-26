@@ -251,6 +251,7 @@ class DemoController extends SimpleController
                 $this->ci->mailer->send($message);
 
                 $ms->addMessageTranslated("success", "REGISTRATION.COMPLETE_TYPE2", $user->toArray());
+                $ms->addMessage("warning", "We are experiencing a temporary issue with our mail server's DKIM configuration, that can cause some mail providers to flag our verification emails as \"possible spam\".  Please check your spam folder if you cannot find the verification email, and disregard any \"untrusted sender\" warnings.");
             } else {
                 // No verification required
                 $ms->addMessageTranslated("success", "REGISTRATION.COMPLETE_TYPE1");
