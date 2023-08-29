@@ -72,7 +72,7 @@ class DemoUser extends User
      */
     public function getSubscribedAttribute($value)
     {
-        return (count($this->member) ? $this->member->subscribed : '');
+        return ($this->member !== null ? $this->member->subscribed : '');
     }
 
     /**
@@ -98,7 +98,7 @@ class DemoUser extends User
      */
     protected function createRelatedMemberIfNotExists()
     {
-        if (!count($this->member)) {
+        if ($this->member === null) {
             $member = new Member([
                 'user_id' => $this->id
             ]);

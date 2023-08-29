@@ -61,8 +61,10 @@
             <div class="form-group">
                 <label for="r-form-locale">{{translate("LOCALE")}}</label>
                 <select id="r-form-locale" class="form-control js-select2" name="locale" {{page.visibility}}>
-                    {% for option, label in locales %}
-                    <option value="{{option}}" {% if (option == current_user.locale) %}selected{% endif %}>{{label}}</option>
+                    {% for option, label in locales.available %}
+                        {% if label is not empty %}
+                            <option value="{{option}}" {% if (option == locales.current) %}selected{% endif %}>{{label}}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             </div>

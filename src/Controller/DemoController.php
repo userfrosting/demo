@@ -20,7 +20,7 @@ use UserFrosting\Sprinkle\Account\Controller\Exception\SpammyRequestException;
 use UserFrosting\Sprinkle\Account\Database\Models\Group;
 use UserFrosting\Sprinkle\Account\Database\Models\Role;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
-use UserFrosting\Sprinkle\Account\Util\Password;
+use UserFrosting\Sprinkle\Account\Facades\Password;
 use UserFrosting\Sprinkle\Core\Controller\SimpleController;
 use UserFrosting\Sprinkle\Core\Facades\Debug;
 use UserFrosting\Sprinkle\Core\Mail\EmailRecipient;
@@ -59,15 +59,21 @@ class DemoController extends SimpleController
             return $response->withRedirect($this->ci->router->pathFor('dashboard'), 302);
         }
 
+        // Get locale information
+        $currentLocale = $this->ci->translator->getLocale()->getIdentifier();
+
         // Get a list of all locales
-        $locales = $config['site.locales.available'];
+        $locales = $this->ci->locale->getAvailableOptions();
 
         // Load validation rules
         $schema = new RequestSchema("schema://register.json");
         $validatorRegister = new JqueryValidationAdapter($schema, $this->ci->translator);
 
         return $this->ci->view->render($response, 'pages/register.html.twig', [
-            "locales" => $locales,
+            "locales" => [
+                'available' => $locales,
+                'current'   => $currentLocale,
+            ],
             "page" => [
                 "validators" => [
                     "register" => $validatorRegister->rules('json', false)

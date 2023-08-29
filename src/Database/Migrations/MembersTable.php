@@ -5,13 +5,13 @@
  * @link      https://github.com/userfrosting/UserFrosting
  * @license   https://github.com/userfrosting/UserFrosting/blob/master/licenses/UserFrosting.md (MIT License)
  */
-namespace UserFrosting\Sprinkle\Demo\Database\Migrations\v400;
+namespace UserFrosting\Sprinkle\Demo\Database\Migrations;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use UserFrosting\Sprinkle\Account\Database\Models\User;
+use UserFrosting\Sprinkle\Core\Database\Migration;
 use UserFrosting\Sprinkle\Demo\Database\Models\Member;
-use UserFrosting\System\Bakery\Migration;
 
 /**
  * Member table migration
