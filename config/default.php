@@ -26,6 +26,7 @@
             ],
             // URLs
             'uri' => [
+                'public' => 'https://demo.userfrosting.com',
                 'author' => 'https://alexanderweissman.com'
             ]
         ]
