@@ -140,7 +140,11 @@ class DemoController extends SimpleController
         }
 
         // Load the request schema
-        $schema = new RequestSchema("schema://register.json");
+        $schema = new RequestSchema('schema://requests/register.yaml');
+        $schema->set('password.validators.length.min', $config['site.password.length.min']);
+        $schema->set('password.validators.length.max', $config['site.password.length.max']);
+        $schema->set('passwordc.validators.length.min', $config['site.password.length.min']);
+        $schema->set('passwordc.validators.length.max', $config['site.password.length.max']);
 
         // Whitelist and set parameter defaults
         $transformer = new RequestDataTransformer($schema);
